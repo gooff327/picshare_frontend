@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Root from './views/Layout.vue'
 
 Vue.use(Router)
 
@@ -10,16 +10,64 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'login',
+      component: () => import(/* webpackChunkName: "about" */ './views/common/login/index.vue')
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/app',
+      name: 'app',
+      component: Root,
+      children: [
+        {
+          path: '/admin',
+          name: 'admin',
+          component: () => import('./views/admin/index.vue'),
+          children: [
+            {
+              path: '/users',
+              name: 'users',
+              component: () => import('./views/admin/usersManage/index.vue')
+            },
+            {
+              path: '/contents',
+              name: 'contents',
+              component: () => import('./views/admin/contentsManage/index.vue')
+            }
+          ]
+        },
+        {
+          path: '/v1',
+          name: 'users',
+          component: () => import('./views/users/index.vue'),
+          children: [
+            {
+              path: '/home',
+              name: 'home',
+              component: () => import('./views/users/home/index.vue')
+            },
+            {
+              path: '/friends',
+              name: 'friends',
+              component: () => import('./views/users/friends/index.vue')
+            },
+            {
+              path: '/producer',
+              name: 'producer',
+              component: () => import('./views/users/producer/index.vue')
+            },
+            {
+              path: '/messages',
+              name: 'messages',
+              component: () => import('./views/users/messages/index.vue')
+            },
+            {
+              path: '/profiles',
+              name: 'profiles',
+              component: () => import('./views/users/profiles/index.vue')
+            }
+          ]
+        }
+      ]
     }
   ]
 })

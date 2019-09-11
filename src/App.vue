@@ -7,6 +7,11 @@
 </template>
 <script>
 export default {
+  data () {
+    return {
+      transitionName: 'slide-left'
+    }
+  },
   watch: {
     '$route' (to, from) {
       const toDepth = to.path.split('/').length

@@ -1,12 +1,7 @@
 <template>
 <a-row type="flex" justify="space-around">
   <a-col :sm="24" :md="18" :lg="12">
-    <a-carousel vertical :dots="false" :autoplay="true">
-      <div><h1>Picture</h1></div>
-      <div><h1>Share</h1></div>
-      <div><h1>PicShare</h1></div>
-      <div><h1>Share Anything</h1></div>
-    </a-carousel>
+    Login
   </a-col>
 </a-row>
 </template>

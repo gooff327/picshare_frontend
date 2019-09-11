@@ -2,6 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Root from './views/Layout.vue'
 
+const routerPush = Router.prototype.push
+Router.prototype.push = function push (location) {
+  return routerPush.call(this, location).catch(error => error)
+}
+
 Vue.use(Router)
 
 export const routes = [
